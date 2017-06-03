@@ -3,4 +3,5 @@ angular.module('app')
 AppController.$inject = ['FirebaseService'];
 function AppController(FirebaseService) {
   console.log('Angular Up');
+  console.log(FirebaseService);
 }

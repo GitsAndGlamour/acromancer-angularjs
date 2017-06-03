@@ -1,0 +1,56 @@
+{
+  "develop": {
+    "projectInfo": {
+      "appName": "Acromancer",
+      "hostName": "acromancer-dev",
+      "memory": "512M",
+      "instances": 1,
+      "env": "nonprod"
+    },
+    "apiurl": "",
+    "firebase": {
+      "apiKey": "AIzaSyBl5f-kqiCZKHAtypOpilzxIZyM_kTKFf0",
+      "authDomain": "acromancer-nonprod.firebaseapp.com",
+      "databaseURL": "https://acromancer-nonprod.firebaseio.com",
+      "projectId": "acromancer-nonprod",
+      "storageBucket": "acromancer-nonprod.appspot.com",
+      "messagingSenderId": "117388361875"
+    }
+  },
+  "qa": {
+    "projectInfo": {
+      "appName": "Acromancer",
+      "hostName": "acromancer-qa",
+      "memory": "512M",
+      "instances": 1,
+      "env": "nonprod"
+    },
+    "apiurl": "",
+    "firebase": {
+      "apiKey": "AIzaSyBl5f-kqiCZKHAtypOpilzxIZyM_kTKFf0",
+      "authDomain": "acromancer-nonprod.firebaseapp.com",
+      "databaseURL": "https://acromancer-nonprod.firebaseio.com",
+      "projectId": "acromancer-nonprod",
+      "storageBucket": "acromancer-nonprod.appspot.com",
+      "messagingSenderId": "117388361875"
+    }
+  },
+  "production": {
+    "projectInfo": {
+      "appName": "Acromancer",
+      "hostName": "acromancer",
+      "memory": "1G",
+      "instances": 1,
+      "env": "prod"
+    },
+    "apiurl": "",
+    "firebase": {
+      "apiKey": "AIzaSyDzY0GrQ3MkXk9D_nj3KfXsvdK2FCutuoo",
+      "authDomain": "acromancer-8c495.firebaseapp.com",
+      "databaseURL": "https://acromancer-8c495.firebaseio.com",
+      "projectId": "acromancer-8c495",
+      "storageBucket": "acromancer-8c495.appspot.com",
+      "messagingSenderId": "289103746033"
+    }
+  }
+}
