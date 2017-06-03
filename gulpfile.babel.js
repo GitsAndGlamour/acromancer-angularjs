@@ -113,7 +113,8 @@ gulp.task('vendor-scripts', () =>
     './app/lib/angular-cookies/angular-cookies.min.js',
     './app/lib/angular-messages/angular-messages.min.js',
     './app/lib/angular-ui-router/release/angular-ui-router.min.js',
-    './app/lib/angular-material/angular-material.min.js'
+    './app/lib/angular-material/angular-material.min.js',
+    './app/lib/firebase/firebase.js'
     // Other Angular scripts
   ])
     .pipe($.newer('.tmp/scripts'))
@@ -169,7 +170,6 @@ gulp.task('app-scripts', ['module-scripts'], () =>
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe($.concat('app.min.js'))
-    .pipe($.uglify({preserveComments: 'some'}))
     // Output files
     .pipe($.size({title: 'scripts'}))
     .pipe($.sourcemaps.write('.'))
