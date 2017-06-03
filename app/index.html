@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="">
+<html lang="" ng-app="app">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Starter Kit</title>
+    <title>Acromancer</title>
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
@@ -52,7 +52,7 @@
     <!-- Your styles -->
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base" ng-controller="AppController">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
@@ -287,6 +287,12 @@
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
     <!-- build:js scripts/vendor.min.js -->
     <script src="scripts/vendor.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/module.min.js -->
+    <script src="scripts/module.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/app.min.js -->
+    <script src="scripts/app.min.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/main.min.js -->
