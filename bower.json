@@ -1,0 +1,27 @@
+{
+  "name": "acromancer",
+  "description": "game",
+  "main": "",
+  "authors": [
+    "Omie omierwalls@gmail.com"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/GitsAndGlamour/acromancer",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-messages": "^1.6.4",
+    "angular-ui-router": "^1.0.3",
+    "angular-material": "^1.1.4",
+    "angular-cookies": "^1.6.4",
+    "angular-mocks": "^1.6.4"
+  }
+}
