@@ -61,6 +61,8 @@ gulp.task('copy', () =>
   gulp.src([
     'app/*',
     '!app/*.html',
+    '!app/lib',
+    '!app/.idea',
     'node_modules/apache-server-configs/dist/.htaccess'
   ], {
     dot: true
@@ -102,10 +104,39 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('.tmp/styles'));
 });
 
+gulp.task('angular-scripts', () =>
+  gulp.src([
+    // Note: Since we are not using useref in the scripts build pipeline,
+    //       you need to explicitly list your scripts here in the right order
+    //       to be correctly concatenated
+    './app/lib/angular/angular.min.js',
+    './app/lib/angular-aria/angular-aria.min.js',
+    './app/lib/angular-animate/angular-animate.min.js',
+    './app/lib/angular-cookies/angular-cookies.min.js',
+    './app/lib/angular-messages/angular-messages.min.js',
+    './app/lib/angular-ui-router/release/angular-ui-router.min.js',
+    './app/lib/angular-material/angular-material.min.js'
+    // Other Angular scripts
+  ])
+    .pipe($.newer('.tmp/scripts'))
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe($.concat('vendor.min.js'))
+    .pipe($.uglify({preserveComments: 'some'}))
+    // Output files
+    .pipe($.size({title: 'scripts'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/scripts'))
+    .pipe(gulp.dest('.tmp/scripts'))
+);
+
+
 // Concatenate and minify JavaScript. Optionally transpiles ES2015 code to ES5.
 // to enable ES2015 support remove the line `"only": "gulpfile.babel.js",` in the
 // `.babelrc` file.
-gulp.task('scripts', () =>
+gulp.task('scripts', ['angular-scripts'], () =>
     gulp.src([
       // Note: Since we are not using useref in the scripts build pipeline,
       //       you need to explicitly list your scripts here in the right order

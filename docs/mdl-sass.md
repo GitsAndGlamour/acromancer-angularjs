@@ -72,6 +72,8 @@ Remove:
 and find the following block in `app/index.html`:
 
 ```html
+    <!-- build:js(app/) ../../scripts/vendor.min.js -->
+    <script src="scripts/vendor.js"></script>
     <!-- build:js(app/) ../../scripts/main.min.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
@@ -81,6 +83,7 @@ Replace the above block with the following code:
 
 ```html
     <!-- build:js(app/) ../../scripts/main.min.js -->
+    <!-- build:js(app/) ../../scripts/vendor.min.js -->
     <script src="./styles/src/mdlComponentHandler.js"></script>
     <script src="./styles/src/button/button.js"></script>
     <script src="./styles/src/checkbox/checkbox.js"></script>
@@ -97,6 +100,7 @@ Replace the above block with the following code:
     <script src="./styles/src/layout/layout.js"></script>
     <script src="./styles/src/data-table/data-table.js"></script>
     <script src="./styles/src/ripple/ripple.js"></script>
+    <script src="scripts/vendor.js"></script>
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
 ```
@@ -139,6 +143,7 @@ gulp.task('scripts', () =>
       // And finally, the ripples
       './app/styles/src/ripple/ripple.js',
       // Other scripts,
+      './app/scripts/vendor.min.js',
       './app/scripts/main.js'
     ])
 ```
