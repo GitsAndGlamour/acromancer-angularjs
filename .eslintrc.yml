@@ -1,6 +1,7 @@
 ---
 globals:
   angular: true
+  document: true
 rules:
   require-jsdoc: 0
   quote-props: 0

@@ -27,12 +27,17 @@
 import path from 'path';
 import gulp from 'gulp';
 import del from 'del';
+import run from 'gulp-run';
 import runSequence from 'run-sequence';
 import browserSync from 'browser-sync';
 import swPrecache from 'sw-precache';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import {output as pagespeed} from 'psi';
 import pkg from './package.json';
+// import devSetup from './scripts/develop-setup.sh';
+// import qaSetup from './scripts/qa-setup.sh';
+// import prodSetup from './scripts/production-setup.sh';
+
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -159,6 +164,7 @@ gulp.task('app-scripts', ['module-scripts'], () =>
     // Note: Since we are not using useref in the scripts build pipeline,
     //       you need to explicitly list your scripts here in the right order
     //       to be correctly concatenated
+    'env.js',
     './app/**/*.constants.js',
     './app/**/*.filter.js',
     './app/**/*.service.js',
@@ -268,6 +274,30 @@ gulp.task('serve:dist', ['default'], () =>
   })
 );
 
+gulp.task('serve-dev', ['set-dev-environment'], () =>
+  runSequence('serve')
+);
+
+gulp.task('serve-dev:dist', ['set-dev-environment'], () =>
+  runSequence('serve:dist')
+);
+
+gulp.task('serve-qa', ['set-qa-environment'], () =>
+  runSequence('serve')
+);
+
+gulp.task('serve-qa:dist', ['set-qa-environment'], () =>
+  runSequence('serve:dist')
+);
+
+gulp.task('serve-prod', ['set-prod-environment'], () =>
+  runSequence('serve')
+);
+
+gulp.task('serve-prod:dist', ['set-prod-environment'], () =>
+  runSequence('serve:dist')
+);
+
 // Build production files, the default task
 gulp.task('default', ['clean'], cb =>
   runSequence(
@@ -277,6 +307,18 @@ gulp.task('default', ['clean'], cb =>
     cb
   )
 );
+
+gulp.task('set-dev-environment', function() {
+  return run('source scripts/develop-setup.sh').exec();
+});
+
+gulp.task('set-qa-environment', function() {
+  return run('source scripts/qa-setup.sh').exec();
+});
+
+gulp.task('set-prod-environment', function() {
+  return run('source scripts/production-setup.sh').exec();
+});
 
 // Run PageSpeed Insights
 gulp.task('pagespeed', cb =>
@@ -306,7 +348,7 @@ gulp.task('generate-service-worker', ['copy-sw-scripts'], () => {
 
   return swPrecache.write(filepath, {
     // Used to avoid cache conflicts when serving on localhost.
-    cacheId: pkg.name || 'web-starter-kit',
+    cacheId: pkg.name || 'acromancer',
     // sw-toolbox.js needs to be listed first. It sets up methods used in runtime-caching.js.
     importScripts: [
       'scripts/sw/sw-toolbox.js',
