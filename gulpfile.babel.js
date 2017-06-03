@@ -104,12 +104,10 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('.tmp/styles'));
 });
 
-gulp.task('angular-scripts', () =>
+gulp.task('vendor-scripts', () =>
   gulp.src([
-    // Note: Since we are not using useref in the scripts build pipeline,
-    //       you need to explicitly list your scripts here in the right order
-    //       to be correctly concatenated
     './app/lib/angular/angular.min.js',
+    './app/lib/angular-route/angular-route.min.js',
     './app/lib/angular-aria/angular-aria.min.js',
     './app/lib/angular-animate/angular-animate.min.js',
     './app/lib/angular-cookies/angular-cookies.min.js',
@@ -120,10 +118,57 @@ gulp.task('angular-scripts', () =>
   ])
     .pipe($.newer('.tmp/scripts'))
     .pipe($.sourcemaps.init())
-    .pipe($.babel())
+    // .pipe($.babel())
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe($.concat('vendor.min.js'))
+    // Output files
+    .pipe($.size({title: 'scripts'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/scripts'))
+    .pipe(gulp.dest('.tmp/scripts'))
+);
+
+gulp.task('module-scripts', ['vendor-scripts'], () =>
+  gulp.src([
+    // Note: Since we are not using useref in the scripts build pipeline,
+    //       you need to explicitly list your scripts here in the right order
+    //       to be correctly concatenated
+    './app/**/app.module.js',
+    './app/**/services.module.js',
+    './app/**/widgets.module.js',
+    './app/**/util.module.js',
+    './app/**/libraries.module.js'
+  ])
+    .pipe($.newer('.tmp/scripts'))
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe($.concat('module.min.js'))
+    // Output files
+    .pipe($.size({title: 'scripts'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/scripts'))
+    .pipe(gulp.dest('.tmp/scripts'))
+);
+
+gulp.task('app-scripts', ['module-scripts'], () =>
+  gulp.src([
+    // Note: Since we are not using useref in the scripts build pipeline,
+    //       you need to explicitly list your scripts here in the right order
+    //       to be correctly concatenated
+    './app/**/*.constants.js',
+    './app/**/*.filter.js',
+    './app/**/*.service.js',
+    './app/**/*.controller.js'
+  ])
+    .pipe($.newer('.tmp/scripts'))
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe($.concat('app.min.js'))
     .pipe($.uglify({preserveComments: 'some'}))
     // Output files
     .pipe($.size({title: 'scripts'}))
@@ -132,11 +177,10 @@ gulp.task('angular-scripts', () =>
     .pipe(gulp.dest('.tmp/scripts'))
 );
 
-
 // Concatenate and minify JavaScript. Optionally transpiles ES2015 code to ES5.
 // to enable ES2015 support remove the line `"only": "gulpfile.babel.js",` in the
 // `.babelrc` file.
-gulp.task('scripts', ['angular-scripts'], () =>
+gulp.task('scripts', ['app-scripts'], () =>
     gulp.src([
       // Note: Since we are not using useref in the scripts build pipeline,
       //       you need to explicitly list your scripts here in the right order
