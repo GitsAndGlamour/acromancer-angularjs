@@ -7,6 +7,8 @@ function LoginController(zxcvbn) {
 
   var ctrl = this;
   ctrl.$onInit = $onInit();
+  ctrl.login = login;
+  ctrl.signup = signup;
   ctrl.showSignInForm = showSignInForm;
   ctrl.showSignUpForm = showSignUpForm;
   ctrl.watchPasswordStrength = watchPasswordStrength;
@@ -54,5 +56,12 @@ function LoginController(zxcvbn) {
       default:
         ctrl.passwordStrengthPhrase = 'Poor';
     }
+  }
+
+  function login() {
+    console.log(ctrl.user);
+  }
+  function signup() {
+    console.log(ctrl.user);
   }
 }

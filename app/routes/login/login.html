@@ -97,7 +97,8 @@
         </md-input-container>
         <div class="float-right">
           <md-button ng-click="$ctrl.user = {}">Clear</md-button>
-          <md-button ng-show="!$ctrl.newRegistration"
+          <md-button ng-click="$ctrl.login()"
+            ng-show="!$ctrl.newRegistration"
                      class="md-raised md-primary"
                      ng-disabled="$ctrl.passwordStrength <= 1
                      || userForm.email.$invalid
@@ -106,7 +107,8 @@
                      || (!$ctrl.user.username && !$ctrl.user.email)
                      || !$ctrl.passwordMatch">Sign In
           </md-button>
-          <md-button ng-show="$ctrl.newRegistration"
+          <md-button ng-click="$ctrl.signup()"
+            ng-show="$ctrl.newRegistration"
                      class="md-raised md-primary"
                      ng-disabled="$ctrl.passwordStrength <= 1
                      || userForm.email.$invalid
