@@ -1,9 +1,9 @@
 angular.module('app')
   .controller('LoginController', LoginController);
 
-LoginController.$inject = ['zxcvbn', '$state'];
+LoginController.$inject = ['zxcvbn', '$state', '$rootScope'];
 
-function LoginController(zxcvbn, $state) {
+function LoginController(zxcvbn, $state, $rootScope) {
 
   var ctrl = this;
   ctrl.$onInit = $onInit();
@@ -62,10 +62,12 @@ function LoginController(zxcvbn, $state) {
 
   function login() {
     console.log(ctrl.user);
+    $rootScope.sessionActive = true;
     $state.go('home');
   }
   function signup() {
     console.log(ctrl.user);
+    $rootScope.sessionActive = true;
     $state.go('home');
   }
 }

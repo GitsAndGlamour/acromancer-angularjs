@@ -12,6 +12,6 @@ function SplashController($state, $timeout) {
       console.log("Welcome to Acromancer!...");
       $timeout(function() {
         $state.go('login');
-      }, 3000);
+      }, 2000);
     }
 }

@@ -1,9 +1,9 @@
 angular.module('app')
     .controller('HomeController', HomeController);
 
-HomeController.$inject = [];
+HomeController.$inject = ['$rootScope', '$state'];
 
-function HomeController() {
+function HomeController($rootScope, $state) {
 
     var ctrl = this;
 
@@ -11,5 +11,12 @@ function HomeController() {
 
     function $onInit() {
       console.log("HOME PAGE");
+      handleSessionRouting();
+    }
+
+    function handleSessionRouting() {
+      if(!$rootScope.sessionActive) {
+        $state.go('login');
+      }
     }
 }
