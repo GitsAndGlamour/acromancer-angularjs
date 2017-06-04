@@ -91,8 +91,11 @@ gulp.task('styles', () => {
 
   // For best performance, don't add Sass partials to `gulp.src`
   return gulp.src([
+    'app/lib/angular-material/angular-material.min.css',
     'app/styles/**/*.scss',
-    'app/styles/**/*.css'
+    'app/styles/**/*.css',
+    'app/routes/**/*.scss',
+    'app/components/**/*.css'
   ])
     .pipe($.newer('.tmp/styles'))
     .pipe($.sourcemaps.init())
@@ -168,6 +171,7 @@ gulp.task('app-scripts', ['module-scripts'], () =>
     './app/**/*.constants.js',
     './app/**/*.filter.js',
     './app/**/*.service.js',
+    './app/**/*.component.js',
     './app/**/*.controller.js'
   ])
     .pipe($.newer('.tmp/scripts'))

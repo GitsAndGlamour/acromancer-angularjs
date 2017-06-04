@@ -1,4 +1,5 @@
 #!/bin/sh
+rm -rf .tmp/
 config=`cat config/config.json | underscore select '.qa' --outfmt text`
 echo "(function (window) {
         window.__env = window.__env || {};
@@ -13,3 +14,8 @@ echo "(function (window) {
         // Setting this to false will disable console output
         window.__env.enableDebug = true;
       }(this));" > env.js
+echo "{
+        "projects": {
+          "default": "acromancer-nonprod"
+        }
+      }" > .firebaserc

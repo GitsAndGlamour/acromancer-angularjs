@@ -5,3 +5,4 @@ app.yaml
 .idea/
 app/lib
 *.log
+.DS_Store
