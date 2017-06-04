@@ -108,6 +108,7 @@ gulp.task('styles', () => {
     .pipe($.if('*.css', $.cssnano()))
     .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('./'))
+    .pipe($.concat('source.min.css'))
     .pipe(gulp.dest('dist/styles'))
     .pipe(gulp.dest('.tmp/styles'));
 });
@@ -122,6 +123,7 @@ gulp.task('vendor-scripts', () =>
     './app/lib/angular-messages/angular-messages.min.js',
     './app/lib/angular-ui-router/release/angular-ui-router.min.js',
     './app/lib/angular-material/angular-material.min.js',
+    './app/lib/angular-zxcvbn-module/angular-zxcvbn-module.js',
     './app/lib/firebase/firebase.js'
     // Other Angular scripts
   ])

@@ -24,6 +24,7 @@
     "angular-cookies": "^1.6.4",
     "angular-mocks": "^1.6.4",
     "angular-route": "^1.6.4",
-    "firebase": "^4.1.1"
+    "firebase": "^4.1.1",
+    "angular-zxcvbn-module": "^1.0.1"
   }
 }

@@ -1,0 +1,123 @@
+<md-card layout="row" layout-align="center start">
+  <md-card-content layout="column">
+    <h2>What's New</h2>
+    <ul>
+      <li>AngularJS Integration</li>
+      <li>We have a new domain! Acromancer.com</li>
+      <li>We've added Google Firebase&copy; for database integration and hosting</li>
+      <li>New splash page</li>
+      <li>Automated processes</li>
+    </ul>
+  </md-card-content>
+  <md-card-content layout="column">
+    <h2>Register</h2>
+    <div ng-show="!$ctrl.newRegistration">
+      Don't have an account? <br>
+      <span layout="row"><a class="md-accent" ng-click="$ctrl.showSignUpForm()" ng-href="">Create your account</a>. It takes less than a minute.</span>
+    </div>
+    <div ng-show="$ctrl.newRegistration">
+      Already have an account? <br>
+      <span layout="row"><a class="md-accent" ng-click="$ctrl.showSignInForm()" ng-href="">Login now</a>, and welcome back.</span>
+    </div>
+    <div class="register-form">
+      <form name="userForm">
+        <md-input-container>
+          <md-switch ng-model="$ctrl.showHints">Showing {{$ctrl.showHints ? "Hints" : "Errors"}}</md-switch>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Username</label>
+          <input minlength="4"
+                 md-maxlength="30"
+                 ng-focus="!$ctrl.newRegistration ? $ctrl.user.email = ''
+                 : $ctrl.user.email = $ctrl.user.email"
+                 ng-required="$ctrl.newRegistration"
+                 name="username"
+                 ng-model="$ctrl.user.username"/>
+          <div class="hint" ng-if="$ctrl.showHints">Tell us what you want your display name to be</div>
+          <div ng-messages="userForm.username.$error" ng-if="!$ctrl.showHints">
+            <div class="md-hue-1" ng-message="required">Username is required.</div>
+            <div class="md-hue-1" ng-message="md-maxlength">Your username must be less than 30 characters long.</div>
+            <div class="md-hue-1" ng-message="minlength">Your username must be at least 4 characters long.</div>
+          </div>
+        </md-input-container>
+        <p layout="row" ng-show="!$ctrl.newRegistration" class="accent-text" layout-align="center center"> - or - </p>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>E-mail</label>
+          <input name="email"
+                 ng-model="$ctrl.user.email"
+                 ng-focus="!$ctrl.newRegistration ? $ctrl.user.username = ''
+                 : $ctrl.user.username = $ctrl.user.username"
+                 ng-required="$ctrl.newRegistration"
+                 minlength="10"
+                 maxlength="100"
+                 ng-pattern="/^.+@.+\..+$/"/>
+
+          <div class="hint" ng-show="$ctrl.showHints">How can we reach you?</div>
+
+          <div ng-messages="userForm.email.$error" ng-hide="$ctrl.showHints">
+            <div class="md-hue-1" ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+              Your email must be between 10 and 100 characters long and look like an e-mail address.
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Password</label>
+          <input type="passord" name="passowrd" ng-model="$ctrl.user.password"
+                 required minlength="8" maxlength="50" ng-change="$ctrl.watchPasswordStrength()"/>
+
+          <div class="hint" ng-show="$ctrl.showHints">Protect your account!</div>
+
+          <div ng-messages="userForm.password.$error" ng-hide="$ctrl.showHints">
+            <div class="md-hue-1" ng-message-exp="['required', 'minlength', 'maxlength']">
+              Your password must be between 10 and 50 characters long.
+            </div>
+          </div>
+          <div class="password-strength-bars">
+            <div ng-class="{ 'active' : $ctrl.passwordStrength >= 1 }" class="password-strength-bar"></div>
+            <div ng-class="{ 'active' : $ctrl.passwordStrength >= 2 }" class="password-strength-bar"></div>
+            <div ng-class="{ 'active' : $ctrl.passwordStrength >= 3 }" class="password-strength-bar"></div>
+            <div ng-class="{ 'active' : $ctrl.passwordStrength >= 4 }" class="password-strength-bar"></div>
+          </div>
+          <div class="float-right md-hue-1">{{$ctrl.passwordStrengthPhrase}}</div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Confirm Password</label>
+          <input type="passord" name="confirm" ng-model="$ctrl.confirmPassword"
+                 ng-required="$ctrl.newRegistration" minlength="8" maxlength="50"
+                 ng-change="$ctrl.checkIfPasswordMatch()"/>
+
+          <div class="hint" ng-show="$ctrl.showHints">Make sure your passwords match</div>
+
+          <div ng-messages="userForm.confirm.$error" ng-hide="$ctrl.showHints">
+            <div class="md-hue-1 md-input-message-animation"
+                 ng-show="!$ctrl.passwordMatch && $ctrl.confirmPassword">
+              Your passwords do not match.
+            </div>
+          </div>
+        </md-input-container>
+        <div class="float-right">
+          <md-button ng-click="$ctrl.user = {}">Clear</md-button>
+          <md-button ng-show="!$ctrl.newRegistration"
+                     class="md-raised md-primary"
+                     ng-disabled="$ctrl.passwordStrength <= 1
+                     || userForm.email.$invalid
+                     || userForm.passowrd.$invalid
+                     || userForm.username.$invalid
+                     || (!$ctrl.user.username && !$ctrl.user.email)
+                     || !$ctrl.passwordMatch">Sign In
+          </md-button>
+          <md-button ng-show="$ctrl.newRegistration"
+                     class="md-raised md-primary"
+                     ng-disabled="$ctrl.passwordStrength <= 1
+                     || userForm.email.$invalid
+                     || userForm.passowrd.$invalid
+                     || userForm.username.$invalid
+                     || !$ctrl.user.username
+                     || !$ctrl.user.email
+                     || !$ctrl.passwordMatch">Sign Up
+          </md-button>
+        </div>
+      </form>
+    </div>
+  </md-card-content>
+</md-card>
