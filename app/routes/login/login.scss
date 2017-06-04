@@ -1,0 +1,25 @@
+.password-strength-bar {
+  width: 75px;
+  margin-left: 5px;
+  border-bottom: 3px solid #9fb4c9;
+}
+
+div.active {
+  border-bottom-color: #021635;
+}
+
+.float-right {
+  float: right;
+}
+
+.password-strength-bars {
+  display: inline-flex;
+}
+
+.hint, .accent-text {
+  font-size: small;
+}
+
+.accent-text {
+  color: #49535e;
+}

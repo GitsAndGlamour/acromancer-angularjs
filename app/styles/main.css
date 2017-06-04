@@ -2,3 +2,7 @@ body {
   font-family: 'Sarpanch', sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+

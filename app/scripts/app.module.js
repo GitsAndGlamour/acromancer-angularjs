@@ -38,7 +38,15 @@ angular
       });
 
       $mdThemingProvider.theme('default')
-        .primaryPalette('acroblue');
+        .primaryPalette('acroblue', {
+          'default': '400',
+          'hue-1': '100',
+          'hue-2': '600',
+          'hue-3': 'A100'
+        })
+        .accentPalette('blue-grey', {
+          'default': '400'
+        });
     })
   .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -50,5 +58,9 @@ angular
       .state('home', {
         url: '/home',
         template: '<home flex></home>'
+      })
+      .state('login', {
+        url: '/login',
+        template: '<login flex></login>'
       });
   });
