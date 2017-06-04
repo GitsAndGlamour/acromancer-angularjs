@@ -1,7 +1,7 @@
 angular
     .module('app', ['libraries', 'services', 'ui.router', 'util', 'widgets'])
     .config(function($mdThemingProvider) {
-      $mdThemingProvider.definePalette('default', {
+      $mdThemingProvider.definePalette('acroblue', {
         '50': 'e1e7ec',
         '100': 'b5c3d0',
         '200': '839bb1',
@@ -37,5 +37,18 @@ angular
         ]
       });
 
-      $mdThemingProvider.theme('default');
-    });
+      $mdThemingProvider.theme('default')
+        .primaryPalette('acroblue');
+    })
+  .config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+    $stateProvider
+      .state('splash', {
+        url: '/',
+        template: '<splash flex></splash>'
+      })
+      .state('home', {
+        url: '/home',
+        template: '<home flex></home>'
+      });
+  });
