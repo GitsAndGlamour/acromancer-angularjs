@@ -95,7 +95,7 @@ gulp.task('styles', () => {
     'app/styles/**/*.scss',
     'app/styles/**/*.css',
     'app/routes/**/*.scss',
-    'app/components/**/*.css'
+    'app/components/**/*.scss'
   ])
     .pipe($.newer('.tmp/styles'))
     .pipe($.sourcemaps.init())

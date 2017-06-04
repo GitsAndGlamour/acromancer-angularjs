@@ -1,9 +1,9 @@
 angular.module('app')
   .controller('LoginController', LoginController);
 
-LoginController.$inject = ['zxcvbn'];
+LoginController.$inject = ['zxcvbn', '$state'];
 
-function LoginController(zxcvbn) {
+function LoginController(zxcvbn, $state) {
 
   var ctrl = this;
   ctrl.$onInit = $onInit();
@@ -36,32 +36,36 @@ function LoginController(zxcvbn) {
   }
 
   function watchPasswordStrength() {
-    ctrl.passwordStrength = zxcvbn(ctrl.user.password).score;
-    switch (ctrl.passwordStrength) {
-      case 0:
-        ctrl.passwordStrengthPhrase = 'Poor';
-        break;
-      case 1:
-        ctrl.passwordStrengthPhrase = 'Weak';
-        break;
-      case 2:
-        ctrl.passwordStrengthPhrase = 'Okay';
-        break;
-      case 3:
-        ctrl.passwordStrengthPhrase = 'Good';
-        break;
-      case 4:
-        ctrl.passwordStrengthPhrase = 'Strong';
-        break;
-      default:
-        ctrl.passwordStrengthPhrase = 'Poor';
+    if(ctrl.newRegistration) {
+      ctrl.passwordStrength = zxcvbn(ctrl.user.password).score;
+      switch (ctrl.passwordStrength) {
+        case 0:
+          ctrl.passwordStrengthPhrase = 'Poor';
+          break;
+        case 1:
+          ctrl.passwordStrengthPhrase = 'Weak';
+          break;
+        case 2:
+          ctrl.passwordStrengthPhrase = 'Okay';
+          break;
+        case 3:
+          ctrl.passwordStrengthPhrase = 'Good';
+          break;
+        case 4:
+          ctrl.passwordStrengthPhrase = 'Strong';
+          break;
+        default:
+          ctrl.passwordStrengthPhrase = 'Poor';
+      }
     }
   }
 
   function login() {
     console.log(ctrl.user);
+    $state.go('home');
   }
   function signup() {
     console.log(ctrl.user);
+    $state.go('home');
   }
 }
