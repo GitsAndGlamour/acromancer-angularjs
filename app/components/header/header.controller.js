@@ -1,9 +1,9 @@
 angular.module('app')
     .controller('HeaderController', HeaderController);
 
-HeaderController.$inject = ['$state', '$rootScope'];
+HeaderController.$inject = ['$state', '$rootScope', 'FirebaseService'];
 
-function HeaderController($state, $rootScope) {
+function HeaderController($state, $rootScope, FirebaseService) {
 
     var ctrl = this;
     ctrl.limitHeader = false;
@@ -19,6 +19,7 @@ function HeaderController($state, $rootScope) {
 
     function logout() {
       $rootScope.sessionActive = false;
+      FirebaseService.toggleSignIn(null);
       $state.go('login');
     }
 }
