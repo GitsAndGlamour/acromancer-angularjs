@@ -1,4 +1,5 @@
 <header-navigation></header-navigation>
+<md-progress-linear md-mode="indeterminate" class="progress-linear" ng-show="$ctrl.dataLoading"></md-progress-linear>
 <md-card layout="row" layout-align="center start">
   <md-card-content layout="column">
     <h2>What's New</h2>
@@ -28,12 +29,10 @@
         <md-input-container>
           <md-switch ng-model="$ctrl.showHints">Showing {{$ctrl.showHints ? "Hints" : "Errors"}}</md-switch>
         </md-input-container>
-        <md-input-container class="md-block" flex-gt-sm>
+        <md-input-container class="md-block" flex-gt-sm ng-show="$ctrl.newRegistration">
           <label>Username</label>
           <input minlength="4"
                  md-maxlength="30"
-                 ng-focus="!$ctrl.newRegistration ? $ctrl.user.email = ''
-                 : $ctrl.user.email = $ctrl.user.email"
                  ng-required="$ctrl.newRegistration"
                  name="username"
                  ng-model="$ctrl.user.username"/>
@@ -44,13 +43,10 @@
             <div class="md-hue-1" ng-message="minlength">Your username must be at least 4 characters long.</div>
           </div>
         </md-input-container>
-        <p layout="row" ng-show="!$ctrl.newRegistration" class="accent-text" layout-align="center center"> - or - </p>
         <md-input-container class="md-block" flex-gt-sm>
           <label>E-mail</label>
           <input name="email"
                  ng-model="$ctrl.user.email"
-                 ng-focus="!$ctrl.newRegistration ? $ctrl.user.username = ''
-                 : $ctrl.user.username = $ctrl.user.username"
                  ng-required="$ctrl.newRegistration"
                  minlength="10"
                  maxlength="100"
@@ -82,7 +78,7 @@
             <div ng-class="{ 'active' : $ctrl.newRegistration && $ctrl.passwordStrength >= 3 }" class="password-strength-bar"></div>
             <div ng-class="{ 'active' : $ctrl.newRegistration && $ctrl.passwordStrength >= 4 }" class="password-strength-bar"></div>
           </div>
-          <div class="float-right md-hue-1">{{$ctrl.passwordStrengthPhrase}}</div>
+          <div class="float-right md-hue-1" ng-show="$ctrl.newRegistration">{{$ctrl.passwordStrengthPhrase}}</div>
         </md-input-container>
         <md-input-container ng-show="$ctrl.newRegistration" class="md-block" flex-gt-sm>
           <label>Confirm Password</label>
@@ -103,20 +99,12 @@
           <md-button ng-click="$ctrl.user = {}">Clear</md-button>
           <md-button ng-click="$ctrl.login()"
             ng-show="!$ctrl.newRegistration"
-                     class="md-raised md-primary"
-                     ng-disabled="$ctrl.passwordStrength <= 1
-                     || userForm.email.$invalid
-                     || userForm.passowrd.$invalid
-                     || userForm.username.$invalid
-                     || (!$ctrl.user.username && !$ctrl.user.email)">Sign In
+                     class="md-raised md-primary">Sign In
           </md-button>
           <md-button ng-click="$ctrl.signup()"
             ng-show="$ctrl.newRegistration"
                      class="md-raised md-primary"
                      ng-disabled="$ctrl.passwordStrength <= 1
-                     || userForm.email.$invalid
-                     || userForm.passowrd.$invalid
-                     || userForm.username.$invalid
                      || !$ctrl.user.username
                      || !$ctrl.user.email
                      || !$ctrl.passwordMatch">Sign Up

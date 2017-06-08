@@ -1,9 +1,9 @@
 angular.module('app')
   .controller('LoginController', LoginController);
 
-LoginController.$inject = ['zxcvbn', '$state', '$rootScope'];
+LoginController.$inject = ['zxcvbn', '$state', '$rootScope', 'FirebaseService', 'UserService', '$timeout', '$mdDialog'];
 
-function LoginController(zxcvbn, $state, $rootScope) {
+function LoginController(zxcvbn, $state, $rootScope, FirebaseService, UserService, $timeout, $mdDialog) {
 
   var ctrl = this;
   ctrl.$onInit = $onInit();
@@ -13,6 +13,7 @@ function LoginController(zxcvbn, $state, $rootScope) {
   ctrl.showSignUpForm = showSignUpForm;
   ctrl.watchPasswordStrength = watchPasswordStrength;
   ctrl.checkIfPasswordMatch = checkIfPasswordMatch;
+  ctrl.dataLoading = false;
   function $onInit() {
   }
 
@@ -20,6 +21,7 @@ function LoginController(zxcvbn, $state, $rootScope) {
     ctrl.newRegistration = true;
     ctrl.user = {};
     ctrl.showHints = true;
+    ctrl.confirmPassword = null;
     ctrl.passwordStrength = 0;
     ctrl.passwordStrengthPhrase = 'Poor';
   }
@@ -61,13 +63,59 @@ function LoginController(zxcvbn, $state, $rootScope) {
   }
 
   function login() {
-    console.log(ctrl.user);
-    $rootScope.sessionActive = true;
-    $state.go('home');
+    ctrl.dataLoading = true;
+    FirebaseService.toggleSignIn(ctrl.user);
+    $timeout(function() {
+      if(FirebaseService.isSignedIn()) {
+        console.log("YES");
+        handleLoginSuccess();
+      } else {
+        console.log("NO");
+        handleLoginFailure();
+      }
+    }, 3000);
   }
+
   function signup() {
-    console.log(ctrl.user);
-    $rootScope.sessionActive = true;
-    $state.go('home');
+    ctrl.dataLoading = true;
+    FirebaseService.handleSignUp(ctrl.user);
+    $timeout(function() {
+      var signup = FirebaseService.getSignUp();
+      if (signup) {
+      handleSignUpSuccess();
+    } else {
+        showSignUpForm();
+      }
+      ctrl.dataLoading = false;
+    }, 5000);
+  }
+
+  function handleLoginSuccess() {
+      UserService.setUser(ctrl.user);
+      $rootScope.sessionActive = true;
+      $state.go('home');
+  }
+
+  function handleLoginFailure() {
+    $rootScope.sessionActive = false;
+    ctrl.dataLoading = false;
+  }
+
+  function handleSignUpSuccess() {
+    alertLogin();
+  }
+
+  function alertLogin() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.getElementsByTagName('body')))
+        .clickOutsideToClose(true)
+        .title('You have successfully created your account!')
+        .textContent('Now you can login and start playing.')
+        .ariaLabel('Signup Success Alert')
+        .ok('Okay')
+    ).then(function() {
+      $state.go('login');
+    });
   }
 }

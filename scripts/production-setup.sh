@@ -5,7 +5,7 @@ echo "(function (window) {
         window.__env = window.__env || {};
 
         // API url
-        window.__env.config = $config;
+        window.__env.config = JSON.parse('$config');
 
         // Base url
         window.__env.baseUrl = '/';

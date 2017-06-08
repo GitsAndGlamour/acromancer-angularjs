@@ -280,7 +280,7 @@ gulp.task('serve:dist', ['default'], () =>
   })
 );
 
-gulp.task('serve-dev', ['set-dev-environment'], () =>
+gulp.task('serve-dev', ['set-dev-environment', 'clean-tmp'], () =>
   runSequence('serve')
 );
 
@@ -288,7 +288,7 @@ gulp.task('serve-dev:dist', ['set-dev-environment'], () =>
   runSequence('serve:dist')
 );
 
-gulp.task('serve-qa', ['set-qa-environment'], () =>
+gulp.task('serve-qa', ['set-qa-environment', 'clean-tmp'], () =>
   runSequence('serve')
 );
 
@@ -296,7 +296,7 @@ gulp.task('serve-qa:dist', ['set-qa-environment'], () =>
   runSequence('serve:dist')
 );
 
-gulp.task('serve-prod', ['set-prod-environment'], () =>
+gulp.task('serve-prod', ['set-prod-environment', 'clean-tmp'], () =>
   runSequence('serve')
 );
 
@@ -313,6 +313,10 @@ gulp.task('default', ['clean'], cb =>
     cb
   )
 );
+
+gulp.task('clean-tmp', function() {
+  return run('rm -rf .tmp/').exec();
+});
 
 gulp.task('set-dev-environment', function() {
   return run('source scripts/develop-setup.sh').exec();

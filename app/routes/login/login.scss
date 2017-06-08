@@ -29,3 +29,13 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 2000s;
 }
+
+.progress-linear {
+  top: 7px;
+}
+
+login {
+  .md-toolbar-tools {
+    font-size: 16px;
+  }
+}
