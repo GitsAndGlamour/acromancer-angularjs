@@ -65,7 +65,15 @@ function LoginController(zxcvbn, $state, $rootScope, FirebaseService, UserServic
   function login() {
     ctrl.dataLoading = true;
     FirebaseService.toggleSignIn(ctrl.user);
-    $timeout(handleLoginSuccess(), 5000);
+    $timeout(function() {
+      if(FirebaseService.isSignedIn()) {
+        console.log("YES");
+        handleLoginSuccess();
+      } else {
+        console.log("NO");
+        handleLoginFailure();
+      }
+    }, 3000);
   }
 
   function signup() {
@@ -86,6 +94,11 @@ function LoginController(zxcvbn, $state, $rootScope, FirebaseService, UserServic
       UserService.setUser(ctrl.user);
       $rootScope.sessionActive = true;
       $state.go('home');
+  }
+
+  function handleLoginFailure() {
+    $rootScope.sessionActive = false;
+    ctrl.dataLoading = false;
   }
 
   function handleSignUpSuccess() {

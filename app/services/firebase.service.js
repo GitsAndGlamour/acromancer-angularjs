@@ -13,13 +13,11 @@ function FirebaseService($mdDialog, $state) {
   service.resetPassword = resetPassword;
   service.updateProfile = updateProfile;
   service.deleteUser = deleteUser;
-  service.getSignIn = getSignIn;
   service.getSignUp = getSignUp;
   service.isDisplayNameTaken = isDisplayNameTaken;
   service.addDisplayNameToCollection = addDisplayNameToCollection;
   service.deleteDisplayNameFromCollection = deleteDisplayNameFromCollection;
-  service.signin = null;
-  service.signup = null;
+  service.isSignedIn = isSignedIn;
 
   $onInit();
 
@@ -47,8 +45,8 @@ function FirebaseService($mdDialog, $state) {
     });
   }
 
-  function getSignIn() {
-    return service.signin;
+  function isSignedIn() {
+    return firebase.auth().currentUser;
   }
 
   function getSignUp() {
@@ -73,7 +71,6 @@ function FirebaseService($mdDialog, $state) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        service.signup = 'signUpFailed';
         // [START_EXCLUDE]
         if (errorCode === 'auth/wrong-password') {
           textContent = 'Wrong password.';
@@ -85,7 +82,6 @@ function FirebaseService($mdDialog, $state) {
         // [END_EXCLUDE]
       });
       // [END authwithemail]
-    service.signup = 'signedUp';
     }
   }
 
@@ -111,8 +107,10 @@ function FirebaseService($mdDialog, $state) {
       }
       console.log(error);
       showAlert(null, textContent, 'login');
+      return;
       // [END_EXCLUDE]
     });
+      service.signup = true;
     // [END createwithemail]
   }
 
