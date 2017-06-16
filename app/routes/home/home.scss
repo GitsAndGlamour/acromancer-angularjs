@@ -1,0 +1,10 @@
+home {
+  .lobby-header {
+    display: inline-flex;
+    min-width: 100%;
+    .lobby-header-column {
+      display: inline;
+      padding-left: 20%;
+    }
+  }
+}

@@ -1,6 +1,168 @@
-<header-navigation></header-navigation>
+<header-navigation tester="$ctrl.gameRooms"></header-navigation>
 <md-card>
   <md-card-content>
-    <h1 layout-align="center center">Welcome to Acromancer!</h1>
+    <h1 layout-align="center center">Lobby</h1>
+    <section layout="row" flex>
+      <md-sidenav class="md-sidenav-left" md-component-id="left"
+                  md-disable-backdrop md-whiteframe="4">
+        <div layout="column" flex layout-fill ng-cloak>
+
+          <md-toolbar md-scroll-shrink>
+            <div class="md-toolbar-tools">Rooms</div>
+          </md-toolbar>
+          <md-content style="height: 600px;" md-theme="altTheme">
+            <section>
+              <md-subheader class="md-primary">{{$ctrl.categories[0]}}</md-subheader>
+              <section>
+                <md-subheader class="md-primary">Adults</md-subheader>
+                <md-list layout-padding>
+                  <md-list-item ng-repeat="adult in $ctrl.adults" class="md-3-line">
+                    <div class="md-list-item-text">
+                      <h3>{{adult}}</h3>
+                      <h4>Random data</h4>
+                      <p>Random notes</p>
+                    </div>
+                    <md-button class="md-secondary">GO</md-button>
+                    <md-divider ng-if="!$last"></md-divider>
+                  </md-list-item>
+                </md-list>
+              </section>
+              <section>
+                <md-subheader class="md-primary">Minors</md-subheader>
+                <md-list layout-padding>
+                  <md-list-item ng-repeat="minor in $ctrl.minors" class="md-3-line">
+                    <div class="md-list-item-text">
+                      <h3>{{minor}}</h3>
+                      <h4>Random data</h4>
+                      <p>Random notes</p>
+                    </div>
+                    <md-button class="md-secondary">GO</md-button>
+                    <md-divider ng-if="!$last"></md-divider>
+                  </md-list-item>
+                </md-list>
+              </section>
+            </section>
+
+            <section>
+              <md-subheader class="md-warn">{{$ctrl.categories[1]}}</md-subheader>
+                <md-list layout-padding>
+                  <md-list-item ng-repeat="country in $ctrl.countries" class="md-3-line">
+                    <div class="md-list-item-text">
+                      <h3>{{country}}</h3>
+                      <h4>Random data</h4>
+                      <p>Random notes</p>
+                    </div>
+                    <md-button class="md-secondary">GO</md-button>
+                    <md-divider ng-if="!$last"></md-divider>
+                  </md-list-item>
+                </md-list>
+              </section>
+
+            <section>
+              <md-subheader>{{$ctrl.categories[2]}}</md-subheader>
+              <md-list layout="column" layout-padding>
+                <md-list-item class="md-3-line" ng-repeat="message in messages">
+                  <img ng-src="{{message.face}}" class="md-avatar" alt="{{message.who}}">
+                  <div class="md-list-item-text">
+                    <h3>{{message.what}}</h3>
+                    <h4>{{message.who}}</h4>
+                    <p>
+                      {{message.notes}}
+                    </p>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </section>
+
+            <section>
+              <md-subheader class="md-accent">Archived messages</md-subheader>
+              <md-list layout="column" layout-padding>
+                <md-list-item class="md-3-line" ng-repeat="message in messages">
+                  <img ng-src="{{message.face}}" class="md-avatar" alt="{{message.who}}">
+                  <div class="md-list-item-text">
+                    <h3>{{message.what}}</h3>
+                    <h4>{{message.who}}</h4>
+                    <p>
+                      {{message.notes}}
+                    </p>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </section>
+
+          </md-content>
+        </div>
+        <md-toolbar class="md-primary">
+          <h1 class="md-toolbar-tools">Rooms</h1>
+        </md-toolbar>
+        <md-content layout-margin>
+            <md-toolbar class="md-theme-light" md-scroll-shrink>
+              <h2 class="md-toolbar-tools">
+                <span>{{$ctrl.categories[0]}}</span>
+              </h2>
+            </md-toolbar>
+            <section>
+              <md-subheader class="md-primary">Adults</md-subheader>
+              <md-list layout-padding>
+                <md-list-item ng-repeat="adult in $ctrl.adults" class="md-3-line">
+                  <div class="md-list-item-text">
+                    <h3>{{adult}}</h3>
+                    <h4>Random data</h4>
+                    <p>Random notes</p>
+                  </div>
+                  <md-button class="md-secondary">GO</md-button>
+                  <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+              </md-list>
+            </section>
+            <section>
+              <md-subheader class="md-primary">Minors</md-subheader>
+              <md-list layout-padding>
+                <md-list-item ng-repeat="minor in $ctrl.minors" class="md-3-line">
+                  <div class="md-list-item-text">
+                    <h3>{{minor}}</h3>
+                    <h4>Random data</h4>
+                    <p>Random notes</p>
+                  </div>
+                  <md-button class="md-secondary">GO</md-button>
+                  <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+              </md-list>
+            </section>
+            <md-toolbar class="md-theme-light" md-scroll-shrink>
+              <h2 class="md-toolbar-tools">
+                <span>{{$ctrl.categories[1]}}</span>
+              </h2>
+            </md-toolbar>
+            <section>
+              <md-list layout-padding>
+                <md-list-item ng-repeat="country in $ctrl.countries" class="md-3-line">
+                  <div class="md-list-item-text">
+                    <h3>{{country}}</h3>
+                    <h4>Random data</h4>
+                    <p>Random notes</p>
+                  </div>
+                  <md-button class="md-secondary">GO</md-button>
+                  <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+              </md-list>
+            </section>
+          <md-button ng-click="$ctrl.toggleLeft()" class="md-accent">
+            Hide Navigation
+          </md-button>
+        </md-content>
+      </md-sidenav>
+      <md-content class="lobby-header" layout="row" layout-padding>
+        <div layout="column" flex="50">
+          <span class="game-metrics"><b>{{$ctrl.numOfGamers | number}}</b> of gamers | <b>{{$ctrl.numOfGameRooms | number}}</b> of games currently in session</span>
+        </div>
+        <div layout="column" class="lobby-header-column" flex="50">
+          <span>You are now in room <b>{{$ctrl.room}}</b></span>
+          <md-button ng-click="$ctrl.toggleLeft()" class="md-raised md-primary">
+            {{$ctrl.showOrHide}} Rooms
+          </md-button>
+        </div>
+      </md-content>
+    </section>
   </md-card-content>
 </md-card>

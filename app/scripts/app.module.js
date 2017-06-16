@@ -1,5 +1,5 @@
 angular
-    .module('app', ['libraries', 'services', 'ui.router', 'util', 'widgets'])
+    .module('app', ['libraries', 'services', 'ui.router', 'util', 'widgets', 'ngLodash'])
     .config(function($mdThemingProvider) {
       $mdThemingProvider.definePalette('acroblue', {
         '50': 'e1e7ec',

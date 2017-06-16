@@ -124,6 +124,7 @@ gulp.task('vendor-scripts', () =>
     './app/lib/angular-ui-router/release/angular-ui-router.min.js',
     './app/lib/angular-material/angular-material.min.js',
     './app/lib/angular-zxcvbn-module/angular-zxcvbn-module.js',
+    './app/lib/ng-lodash/build/ng-lodash.js',
     './app/lib/firebase/firebase.js'
     // Other Angular scripts
   ])

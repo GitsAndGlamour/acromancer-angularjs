@@ -18,6 +18,7 @@ function FirebaseService($mdDialog, $state) {
   service.addDisplayNameToCollection = addDisplayNameToCollection;
   service.deleteDisplayNameFromCollection = deleteDisplayNameFromCollection;
   service.isSignedIn = isSignedIn;
+  service.getGameRooms = getGameRooms;
 
   $onInit();
 
@@ -207,5 +208,12 @@ function FirebaseService($mdDialog, $state) {
 
   function deleteDisplayNameFromCollection(username) {
     firebase.database().ref('users/' + username).remove();
+  }
+
+  function getGameRooms() {
+    return firebase.database().ref('/gamerooms').once('value').then(function(snapshot) {
+      console.log(snapshot.val());
+      return snapshot.val();
+    });
   }
 }
